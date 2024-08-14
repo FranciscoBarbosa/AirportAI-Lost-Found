@@ -2,17 +2,15 @@
 * Setup MongoDB.
 */
 'use strict';
-
 let mongoose = require('mongoose');
-const DATABASE_URL = 'mongodb://127.0.0.1:27017/AirportAI-exercise';
-
+const logger = require('pino')()
+require('dotenv').config();
 
 module.exports = (async function() {
+  const DATABASE_URI = process.env.DATABASE_URI;
 
-  const DATABASE_URL = process.env.DATABASE_URI;
-
-  if (!DATABASE_URL) {
-    throw new Error('DATABASE_URL is not set');
+  if (!DATABASE_URI) {
+    throw new Error('DATABASE_URI is not set');
   }
 
   // Mongoose events.
@@ -40,7 +38,7 @@ module.exports = (async function() {
 
   try {
     // Connect to db.
-    await mongoose.connect(DATABASE_URL, {
+    await mongoose.connect(DATABASE_URI, {
       connectTimeoutMS: 20000,
       serverSelectionTimeoutMS: 5000,
       maxPoolSize: 75,
