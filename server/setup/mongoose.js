@@ -2,7 +2,7 @@
 * Setup MongoDB.
 */
 'use strict';
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const logger = require('pino')()
 require('dotenv').config();
 
@@ -53,4 +53,4 @@ module.exports = (async function() {
     logger.error('MongoDB', 'Unable to connect MongoDB. If problem persists, please restart the server', error);
     return null;
   }
-}());
+});

@@ -3,7 +3,7 @@
 */
 'use strict';
 
-let app = require('express')();
+var app = require('express')();
 const PORT = 3000;
 
 // Set up Express.
@@ -13,7 +13,7 @@ require('./server/setup/express')(app);
 require('./server/setup/mongoose')();
 
 // Set up routes.
-app.use('/', require('./server/routes'));
+app.use('/api', require('./server/routes'));
 
 // Start app.
 app.listen(PORT, function() {
