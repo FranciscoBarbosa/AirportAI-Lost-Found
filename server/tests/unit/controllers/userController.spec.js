@@ -1,6 +1,6 @@
 const passport = require('passport');
-const { authenticateUser, registerUser } = require('../../src/controllers/userController');
-const User = require('../../src/models/user');
+const { authenticateUser, registerUser } = require('../../../src/controllers/userController');
+const User = require('../../../src/models/user');
 
 jest.mock('passport');
 jest.mock('passport-local-mongoose')
@@ -94,7 +94,7 @@ describe('Auth Controller', () => {
 
         await registerUser(req, res);
 
-        expect(res.status).toHaveBeenCalledWith(500);
+        expect(res.status).toHaveBeenCalledWith(400);
         expect(res.json).toHaveBeenCalledWith({ error: 'Registration failed' });
         delete User.register;
     });

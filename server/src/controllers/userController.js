@@ -9,7 +9,7 @@ exports.registerUser = (req, res) => {
   User.register(user, password, (err) => {
     if (err) {
       console.log(err);
-      return res.status(500).json({ error: err.message });
+      return res.status(400).json({ error: err.message });
     }
     res.status(200).json({ message: 'User registered successfully' });
   });
