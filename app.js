@@ -7,13 +7,13 @@ var app = require('express')();
 const PORT = 3000;
 
 // Set up Express.
-require('./server/setup/express')(app);
+require('./server/src/setup/express')(app);
 
 // Set up MongoDB.
-require('./server/setup/mongoose')();
+require('./server/src/setup/mongoose')();
 
 // Set up routes.
-app.use('/api', require('./server/routes'));
+app.use('/api', require('./server/src/routes'));
 
 // Start app.
 app.listen(PORT, function() {
