@@ -1,0 +1,28 @@
+{
+    "roles": [
+      {
+        "name": "admin",
+        "permissions": [
+          "create_product",
+          "read_product",
+          "update_product",
+          "delete_product"
+        ]
+      },
+      {
+        "name": "agent",
+        "permissions": [
+          "create_product",
+          "read_product",
+          "delete_product"
+        ]
+      },
+      {
+        "name": "passenger",
+        "permissions": [
+          "create_product",
+          "read_product"
+        ]
+      }
+    ]
+  }

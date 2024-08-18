@@ -20,6 +20,7 @@
     "moment-timezone": "0.5.45",
     "mongoose": "^7.8.0",
     "passport": "^0.7.0",
+    "passport-http": "^0.3.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0",
     "pino": "^9.3.2",
