@@ -15,7 +15,7 @@ describe('User Routes', () => {
     describe('Register User', () => {
         it('should register a new user', async () => {
             const response = await request(app)
-                .post('/api/auth/user')
+                .post('/api/v1/auth/user')
                 .send({
                     username: 'testuser',
                     password: 'pass',
@@ -28,7 +28,7 @@ describe('User Routes', () => {
 
         it('should not register a user with missing fields', async () => {
             const response = await request(app)
-                .post('/api/auth/user')
+                .post('/api/v1/auth/user')
                 .send({
                     username: 'testuser'
                 });

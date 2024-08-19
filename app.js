@@ -13,7 +13,7 @@ require('./server/src/setup/express')(app);
 require('./server/src/setup/mongoose')();
 
 // Set up routes.
-app.use('/api', require('./server/src/routes'));
+app.use('/api/v1', require('./server/src/routes'));
 
 // Start app.
 app.listen(PORT, function() {
