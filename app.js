@@ -3,7 +3,7 @@
 */
 'use strict';
 
-var app = require('express')();
+let app = require('express')();
 const PORT = 3000;
 
 // Set up Express.

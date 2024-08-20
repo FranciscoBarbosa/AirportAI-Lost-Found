@@ -1,5 +1,6 @@
 const passport = require('passport');
-const { authenticateUser, registerUser } = require('../../../src/controllers/userController');
+const { authenticateUser } = require('../../../src/middlewares/authentication');
+const { registerUser } = require('../../../src/controllers/userController');
 const User = require('../../../src/models/user');
 
 jest.mock('passport');

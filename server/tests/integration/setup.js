@@ -1,7 +1,7 @@
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const mongoose = require('mongoose');
 
-var mongoServer;
+let mongoServer;
 
 const connect = async () => {
   mongoServer = await MongoMemoryServer.create();
