@@ -16,6 +16,7 @@ describe('User Routes', () => {
         it('should register a new user', async () => {
             const response = await request(app)
                 .post('/api/v1/users/')
+                .set('Authorization', 'Basic ' + Buffer.from('admin:pass').toString('base64'))
                 .send({
                     username: 'testuser',
                     password: 'pass',
@@ -29,6 +30,7 @@ describe('User Routes', () => {
         it('should not register a user with missing fields', async () => {
             const response = await request(app)
                 .post('/api/v1/users')
+                .set('Authorization', 'Basic ' + Buffer.from('admin:pass').toString('base64'))
                 .send({
                     username: 'testuser'
                 });

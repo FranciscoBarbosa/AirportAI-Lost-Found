@@ -26,8 +26,7 @@ describe('Auth Controller', () => {
 
         await authenticateUser(req, res, next);
 
-        expect(res.status).toHaveBeenCalledWith(200);
-        expect(res.send).toHaveBeenCalledWith('This is a protected route');
+        expect(next).toHaveBeenCalledWith();
     });
 
     it('should not authenticate unregistered User', async () => {

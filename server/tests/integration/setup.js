@@ -1,6 +1,6 @@
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const mongoose = require('mongoose');
-
+const User = require('../../src/models/user')
 let mongoServer;
 
 const connect = async () => {
@@ -8,6 +8,15 @@ const connect = async () => {
   const uri = mongoServer.getUri();
   console.log("connecting to " + uri);
   await mongoose.connect(uri);
+
+  const adminUser = {
+    username: 'admin',
+    password: 'pass',
+    role: 'admin'
+  };
+  
+  const user = new User(adminUser);
+  await user.save();
 };
 
 const close = async () => {
@@ -17,4 +26,4 @@ const close = async () => {
   }
 };
 
-module.exports = { connect, close };
+module.exports = { connect, close};

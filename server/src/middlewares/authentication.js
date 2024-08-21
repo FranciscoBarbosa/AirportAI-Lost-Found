@@ -9,7 +9,6 @@ exports.authenticateUser = (req, res, next) => {
         return res.status(401).json({ error: 'User credentials are not correct' });
       }
       req.user = user;
-      console.log("Authenticated user: ", req.user);
       return next();
     })(req, res, next);
   
