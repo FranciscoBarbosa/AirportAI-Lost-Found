@@ -13,6 +13,10 @@ exports.findProducts = async (query) => {
     return await Product.find(query);
 }
 
+exports.findById = async (id) => {
+    return await Product.findById(id);
+}
+
 exports.update = async (id, productData) => {
     return await Product.findByIdAndUpdate(id, productData, { new: true });
 }

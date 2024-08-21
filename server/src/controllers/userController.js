@@ -13,3 +13,14 @@ exports.registerUser = (req, res) => {
   });
 };
 
+exports.findUsers = async (req, res) => {
+  try{
+    const users = await User.find();
+    res.status(200).json({ message: users });
+  }
+  catch(error){
+    res.status(500).json({ message: 'Error finding users', error });
+}
+  
+};
+

@@ -4,6 +4,8 @@
         "name": "admin",
         "permissions": [
           "create_product",
+          "create_user",
+          "read_user",
           "read_product",
           "update_product",
           "delete_product"

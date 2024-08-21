@@ -9,7 +9,8 @@ exports.authenticateUser = (req, res, next) => {
         return res.status(401).json({ error: 'User credentials are not correct' });
       }
       req.user = user;
-      return res.status(200).send('This is a protected route');
+      console.log("Authenticated user: ", req.user);
+      return next();
     })(req, res, next);
   
   }

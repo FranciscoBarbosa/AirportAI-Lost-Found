@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
+const {authenticateUser} = require('../middlewares/authentication')
 const {checkPermission} = require('../middlewares/rbac');
 const {createProduct, findProducts, findProduct, updateProduct, deleteProduct} = require('../controllers/productController');
 
-router.post('/', createProduct, checkPermission('create_product'));
+router.post('/', authenticateUser, checkPermission('create_product'), createProduct);
 
-router.get('/', findProducts, checkPermission('read_product'));
+router.get('/', authenticateUser, checkPermission('read_product'), findProducts);
 
-router.get('/:id', findProduct, checkPermission('read_product'));
+router.get('/:id', authenticateUser, checkPermission('read_product'), findProduct);
 
-router.patch('/:id', updateProduct, checkPermission('update_product'));
+router.patch('/:id', authenticateUser, checkPermission('update_product'), updateProduct);
 
-router.delete('/:id', deleteProduct, checkPermission('delete_product'));
+router.delete('/:id', authenticateUser, checkPermission('delete_product'), deleteProduct);
 
 module.exports = router;
