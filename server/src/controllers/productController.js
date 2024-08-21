@@ -31,7 +31,7 @@ validateRequestBody = (req) => {
     }
 }
 
-exports.findProducts = async (req, res) => {
+exports.findProducts = async (req, res) => { //Todo: add pagination 
     try{
         const {minLostTime, maxLostTime, message} = req.query;
         const query = extractQuery(req);

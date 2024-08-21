@@ -21,11 +21,15 @@ npm start
 If everything is ok, you should see a 'Hello world!' message when you go to 'http://localhost:3000/api/v1' on your browser.
 
 By default the application creates an admin user (credentials configurable in .env file).
-Then it is possible to test:
-- creation of users with different roles (using POST with basic authentication and admin credentials).
-  
-- create, view, delete products with different permissions based on account role.
-- search product per brand,color, date
-- search product per message
+Using the Lost & found API.postman_collection.json file it is possible to test our API with the following use cases:
 
-TODO: improve readme and usecases mentioned above
+- create user with agent,passenger and admin roles (as admin)
+- get all users (as admin)
+- create products (as admin/agent or passenger)
+- get products (as admin/agent or passenger):
+    - all products
+    - product by Id
+    - products by brand or type
+    - products lost in a range interval (minLostTime and maxLostTime)
+    - products by message (using Full text search)
+- delete products (as admin or agent)

@@ -6,7 +6,7 @@ exports.authenticateUser = (req, res, next) => {
         return next(err);
       }
       if(!user){
-        return res.status(401).json({ error: 'User credentials are not correct' });
+        return res.status(401).json({ error: 'Not allowed' });
       }
       req.user = user;
       return next();
