@@ -1,15 +1,87 @@
 const Product = require('../models/product');
-const {findAll, findById, create, update, deleteById} = require('../repositories/ProductRepository');
+const {findProducts, findById, findByMessage, create, update, deleteById} = require('../repositories/ProductRepository');
 
 exports.createProduct = async (req, res,) => {
-    const product = await create(req.body)
-    res.status(201).json({ message: product });
+    try{
+        validateRequestBody(req);
+        const product = await create(req.body)
+        return res.status(201).json({ message: product });
+    }
+    catch(error){
+        if(error.status === 400){
+            return res.status(400).json({ message: error.message });
+        }
+        res.status(500).json({ message: 'Error creating product', error });
+    }
+}
+
+validateRequestBody = (req) => {
+    const {type, brand, color, lostTime} = req.body;
+
+    if (!type || !brand || !color || !lostTime) {
+        const error = new Error('Missing mandatory fields');
+        error.status = 400;
+        throw error;
+    }
+
+    if (isNaN(Date.parse(lostTime))) {
+        const error = new Error('Invalid Date Format');
+        error.status = 400;
+        throw error;    
+    }
 }
 
 exports.findProducts = async (req, res) => {
-    const products = await findAll();
-    res.status(200).json({ message: products });
+    try{
+        const {minLostTime, maxLostTime, message} = req.query;
+        const query = extractQuery(req);
+        let products;
+        if(message){
+            products = await findByMessage(message);
+        }
+        else{
+            const query = extractQuery(req);
+            products = await findProducts(query);
+        }
+        if(!products || products.length == 0){
+            return res.status(200).json({ message: "No Products found" });
+        }
+        
+        const filteredProducts = filterProductsByLostTime(products, minLostTime, maxLostTime);
+        
+        return res.status(200).json({ message: filteredProducts });
+    }
+    catch(error){
+        res.status(500).json({ message: 'Error finding product', error });
+    }
 };
+
+extractQuery = (req) => {
+    const {type, brand, color} = req.query;
+    let query = {}
+    if(type){
+        query.type = type;
+    }
+    if(brand){
+        query.brand = brand;
+    }
+    if(color){
+        query.color = color;
+    }
+    return query;
+}
+
+filterProductsByLostTime = (products, minLostTime, maxLostTime) => {
+    let filteredProducts = products;
+    if(minLostTime){
+        filteredProducts = filteredProducts.filter(product => new Date(product.lostTime) >= new Date(minLostTime));
+    }
+    if(maxLostTime){
+        filteredProducts = filteredProducts.filter(product => new Date(product.lostTime) <= new Date(maxLostTime));
+    }
+    return filteredProducts;
+}
+
 
 exports.findProduct = async (req, res,) => {
     try{

@@ -1,16 +1,16 @@
 const Product = require('../models/product');
 
-exports.findById = async (id) => {
-    return await Product.findById(id);
-}
-
-exports.findAll = async () => {
-    return await Product.find();
-}
-
 exports.create = async (productData) => {
     const product = new Product(productData);
     return await product.save();
+}
+
+exports.findByMessage = async (text) => {
+    return await Product.find({ $text: {$search: text}})
+}
+
+exports.findProducts = async (query) => {
+    return await Product.find(query);
 }
 
 exports.update = async (id, productData) => {
@@ -20,4 +20,3 @@ exports.update = async (id, productData) => {
 exports.deleteById = async (id) => {
     return await Product.findByIdAndDelete(id);
 }
-
