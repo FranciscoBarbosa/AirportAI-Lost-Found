@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const logger = require('pino')()
 require('dotenv').config();
+const initializeAdmin = require('../config/initializeAdmin');
 
 module.exports = (async function() {
   const DATABASE_URI = process.env.DATABASE_URI;
@@ -36,6 +37,7 @@ module.exports = (async function() {
         serverSelectionTimeoutMS: 5000,
         maxPoolSize: 75,
       });
+      await initializeAdmin();
 
       require('../models');
       return mongoose;
