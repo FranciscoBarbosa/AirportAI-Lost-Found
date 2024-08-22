@@ -34,8 +34,11 @@ Using the Lost & found API.postman_collection.json file it is possible to test o
     - products by message (using Full text search)
 - delete products (as admin or agent)
 
-Future Improvements:
+## Future Improvements:
 - Add Login endpoint that returns JWT token
 - Use token in the endpoints instead of basic authentication
 - Add endpoint for passengers to report a loss
 - Add an endpoint to product so a passenger can claim a specific product as his own.
+- Add a dockerfile & docker-compose
+- Fix integration tests and add more unit and integration tests to cover all usecases
+- Add a test coverage tool
